@@ -1,0 +1,528 @@
+openapi: 3.0.3
+info:
+  title:  Api de Veiculos - LocaMais
+  version: 1.0.0
+  description: API que deve ser usado para todos os processos relacionados a Veículos na LocaMais, tais como listagem de Veículos alugados e disponíveis, alugue de carros e valor de faturado.
+  contact:
+    email: desenvolvimento@locamais.com.br
+servers:
+  - url: http://localhost:8080
+    description: Servidor Local
+tags:
+  - name: veiculos
+    description: Endpoints para veículos
+
+paths:
+  /v1/veiculos:
+    post:
+      tags:
+        - veiculos
+      summary: Cadastro de Veículos
+      description: Cadastro de veículos da base de dados LocaMais
+      operationId: postVeiculo
+      requestBody:
+        $ref: '#/components/requestBodies/RequestPostVeiculo'
+      responses:
+        '201':
+          $ref: "#/components/responses/ResponseSuccess"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
+        default:
+          $ref: "#/components/responses/ResponseSuccess"
+  /v1/veiculos/{idVeiculo}:
+    get:
+      tags:
+        - veiculos
+      summary: Busca por dados de veículo
+      description: Busca por dados de veiculos através do id do veículo
+      operationId: getVeiculo
+      parameters:
+        - $ref: "#/components/parameters/IdVeiculo"
+      responses:
+        '200':
+          $ref: "#/components/responses/ResponseGetVeiculo"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
+        default:
+          $ref: "#/components/responses/ResponseGetVeiculo"
+    patch:
+      tags:
+        - veiculos
+      summary: Update de informações de veículo
+      description: Atualização de dados de veículo através do ID
+      operationId: patchVeiculo
+      requestBody:
+        $ref: '#/components/requestBodies/RequestPatchVeiculo'
+      parameters:
+        - $ref: "#/components/parameters/IdVeiculo"
+      responses:
+        '200':
+          $ref: "#/components/responses/ResponseSuccess"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
+        default:
+          $ref: "#/components/responses/ResponseSuccess"
+    delete:
+      tags:
+        - veiculos
+      summary: Deletar Veículo
+      description: Deleção de veículos através do id
+      operationId: deleteVeiculo
+      parameters:
+        - $ref: "#/components/parameters/IdVeiculo"
+      responses:
+        '204':
+          description: "Veiculo deletado"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
+        default:
+          description: "Veiculo deletado"
+  /v1/veiculos/listAll:
+    get:
+      tags:
+        - veiculos
+      summary: Listagem de todos os veículos
+      description: Update an existing pet by Id
+      operationId: getListAll
+      responses:
+        '200':
+          $ref: "#/components/responses/ResponseGetListaVeiculos"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
+        default:
+          $ref: "#/components/responses/ResponseGetListaVeiculos"
+
+  /v1/veiculos/listRented:
+    get:
+      tags:
+        - veiculos
+      summary: Listagem de todos os veículos alugados
+      description: Update an existing pet by Id
+      operationId: getListRented
+      responses:
+        '200':
+          $ref: "#/components/responses/ResponseGetListaVeiculos"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
+        default:
+          $ref: "#/components/responses/ResponseGetListaVeiculos"
+  /v1/veiculos/listUnrented:
+    get:
+      tags:
+        - veiculos
+      summary: Listagem de todos os veículos não alugados
+      description: Update an existing pet by Id
+      operationId: getListUnrented
+      responses:
+        '200':
+          $ref: "#/components/responses/ResponseGetListaVeiculos"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
+        default:
+          $ref: "#/components/responses/ResponseGetListaVeiculos"
+
+security:
+  - basicAuth: [ ]
+components:
+  parameters:
+    FlgExterno:
+      name: flg_externo
+      in: header
+      description: Flag Externo
+      required: false
+      schema:
+        type: boolean
+        enum: [true, false]
+        example: true
+    IdFiscal:
+      name: idFiscal
+      in: header
+      description: IdFiscal
+      required: true
+      schema:
+        type: string
+        pattern: "\\d"
+        minLength: 11
+        maxLength: 11
+        example: 44109095093
+    IdVeiculo:
+      name: idVeiculo
+      in: path
+      description: IdVeiculo
+      required: true
+      schema:
+        type: string
+        pattern: '^([a-zA-Z0-9][a-zA-Z0-9\-]{1,99})$'
+        maxLength: 100
+        example: 53680f55-f15d-7963-9d89-53680f55f15d
+  requestBodies:
+    RequestPostVeiculo:
+      description: Payload para cadastro de veículo
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/RequestPostVeiculo"
+    RequestPatchVeiculo:
+      description: Payload para cadastro de veículo
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/RequestPatchVeiculo"
+  responses:
+    ResponseGetListaVeiculos:
+      description: Registro criado
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ResponseGetListaVeiculos"
+    ResponseGetVeiculo:
+      description: Registro criado
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ResponseGetVeiculo"
+    ResponseSuccess:
+      description: Registro criado
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ResponseSuccess"
+    BadRequest:
+      description: >-
+        A requisição foi malformada, omitindo atributos obrigatórios, seja no
+        payload ou através de atributos na URL.
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ResponseError"
+    Forbidden:
+      description: O token tem escopo incorreto ou uma política de segurança foi violada
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ResponseError"
+    InternalServerError:
+      description: Ocorreu um erro no gateway da API ou no microsserviço
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ResponseError"
+    MethodNotAllowed:
+      description: O consumidor tentou acessar o recurso com um método não suportado
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ResponseError"
+    NotAcceptable:
+      description: >-
+        A solicitação continha um cabeçalho Accept diferente dos tipos de mídia
+        permitidos ou um conjunto de caracteres diferente de UTF-8
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ResponseError"
+    NotFound:
+      description: O recurso solicitado não existe ou não foi implementado
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ResponseError"
+    NoContent:
+      description: O recurso solicitado foi encontrato, porém não há dado
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ResponseError"
+    PaymentRequired:
+      description: Uso da api requer pagamento
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ResponseError"
+    ServiceUnavailable:
+      description: Servidor temporariamente indisponível
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ResponseError"
+    TooManyRequests:
+      description: >-
+        A operação foi recusada, pois muitas solicitações foram feitas dentro de
+        um determinado período ou o limite global de requisições concorrentes
+        foi atingido
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ResponseError"
+    Unauthorized:
+      description: Cabeçalho de autenticação ausente/inválido ou token inválido
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ResponseError"
+
+  schemas:
+    RequestPostVeiculo:
+      type: object
+      description: Request Post Veiculos.
+      required:
+        - nome
+        - tipoVeiculo
+        - placa
+        - chassi
+      additionalProperties: false
+      properties:
+        nome:
+          description: Nome do Veículo.
+          type: string
+          minLength: 2
+          maxLength: 100
+          example: ONIX
+        tipoVeiculo:
+          description: Tipo do Veiculo.
+          type: string
+          minLength: 2
+          maxLength: 50
+          example: HATCH
+        marca:
+          description: CPF-CNPJ.
+          type: string
+          minLength: 2
+          maxLength: 50
+          example: Chevrole
+        placa:
+          description: CPF-CNPJ.
+          type: string
+          minLength: 8
+          maxLength: 8
+          pattern: '^([a-zA-Z0-9][a-zA-Z0-9\-])$'
+          example: "PCF-8H29"
+        chassi:
+          description: CPF-CNPJ.
+          type: string
+          minLength: 17
+          maxLength: 17
+          pattern: '^([a-zA-Z0-9][a-zA-Z0-9\-])$'
+          example: "LVVDA11A75D029813"
+        valorTabela:
+          description: CPF-CNPJ.
+          type: number
+          example: 100.00
+    RequestPatchVeiculo:
+      type: object
+      description: Request Patch Veiculos.
+      additionalProperties: false
+      properties:
+        nome:
+          description: Nome do Veículo.
+          type: string
+          minLength: 2
+          maxLength: 100
+          example: ONIX
+        tipoVeiculo:
+          description: Tipo do Veiculo.
+          type: string
+          minLength: 2
+          maxLength: 50
+          example: HATCH
+        marca:
+          description: CPF-CNPJ.
+          type: string
+          minLength: 2
+          maxLength: 50
+          example: Chevrole
+        placa:
+          description: CPF-CNPJ.
+          type: string
+          minLength: 8
+          maxLength: 8
+          pattern: '^([a-zA-Z0-9][a-zA-Z0-9\-])$'
+          example: "PCF-8H29"
+        chassi:
+          description: CPF-CNPJ.
+          type: string
+          minLength: 17
+          maxLength: 17
+          pattern: '^([a-zA-Z0-9][a-zA-Z0-9\-])$'
+          example: "LVVDA11A75D029813"
+        valorTabela:
+          description: CPF-CNPJ.
+          type: number
+          example: 100.00
+    ResponseGetListaVeiculos:
+      type: array
+      description: Response Lista de Veículos
+      items:
+        $ref: "#/components/schemas/ResponseGetVeiculo"
+    ResponseGetVeiculo:
+      type: object
+      description: Response data.
+      additionalProperties: false
+      properties:
+        idVeiculo:
+          description: Nome do Veículo.
+          type: string
+          minLength: 10
+          maxLength: 40
+          example: 53680f55-f15d-7963-9d89-53680f55f15d
+        nome:
+          description: Nome do Veículo.
+          type: string
+          minLength: 2
+          maxLength: 100
+          example: ONIX
+        tipoVeiculo:
+          description: Tipo do Veiculo.
+          type: string
+          minLength: 2
+          maxLength: 50
+          example: HATCH
+        alugado:
+          description: O veículo está alugado?.
+          type: boolean
+          example: false
+        status:
+          description: O veículo está alugado?.
+          type: string
+          enum: [disponivel, indisponivel,manutencao,inutilizado]
+          example: disponivel
+        marca:
+          description: CPF-CNPJ.
+          type: string
+          minLength: 2
+          maxLength: 50
+          example: Chevrole
+        placa:
+          description: CPF-CNPJ.
+          type: string
+          minLength: 8
+          maxLength: 8
+          pattern: '^([a-zA-Z0-9][a-zA-Z0-9\-])$'
+          example: "PCF-8H29"
+        chassi:
+          description: CPF-CNPJ.
+          type: string
+          minLength: 17
+          maxLength: 17
+          pattern: '^([a-zA-Z0-9][a-zA-Z0-9\-])$'
+          example: "LVVDA11A75D029813"
+        valorTabela:
+          description: CPF-CNPJ.
+          type: number
+          example: 100.00
+    ResponseSuccess:
+      type: object
+      additionalProperties: false
+      required:
+        - idVeiculo
+        - message
+        - statusCode
+      properties:
+        idVeiculo:
+          description: Id Pessoa.
+          type: string
+          example: 53680f55-f15d-7963-9d89-53680f55f15d
+        message:
+          description: Mensagem de retorno.
+          type: string
+          example: Mensagem de retorno.
+        statusCode:
+          description: StatusCode de retorno.
+          type: integer
+          example: 0.
+    ResponseError:
+      type: object
+      additionalProperties: false
+      required:
+        - error
+        - statusCode
+        - success
+      properties:
+        error:
+          description: Mensagen de erro
+          type: string
+          maxLength: 255
+        statusCode:
+          description: Código da falha
+          type: integer
+        success:
+          description: 'True para sucesso e False para falha'
+          type: boolean
+          example: false
+
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic

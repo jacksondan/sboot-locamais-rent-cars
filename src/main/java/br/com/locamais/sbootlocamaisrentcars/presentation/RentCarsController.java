@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-public class Controller implements V1Api {
+public class RentCarsController implements V1Api {
 
     @Override
     public ResponseEntity<ResponseGetVeiculo> getVeiculo(String idVeiculo){

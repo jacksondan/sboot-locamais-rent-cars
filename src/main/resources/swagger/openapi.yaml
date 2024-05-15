@@ -246,7 +246,10 @@ components:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/ResponseGetListaVeiculos"
+            type: array
+            description: Response Lista de Veículos
+            items:
+              $ref: "#/components/schemas/ResponseGetVeiculo"
     ResponseGetVeiculo:
       description: Registro criado
       content:
@@ -338,13 +341,13 @@ components:
       type: object
       description: Request Post Veiculos.
       required:
-        - nome
+        - nomeVeiculo
         - tipoVeiculo
         - placa
         - chassi
       additionalProperties: false
       properties:
-        nome:
+        nomeVeiculo:
           description: Nome do Veículo.
           type: string
           minLength: 2
@@ -385,7 +388,7 @@ components:
       description: Request Patch Veiculos.
       additionalProperties: false
       properties:
-        nome:
+        nomeVeiculo:
           description: Nome do Veículo.
           type: string
           minLength: 2
@@ -421,23 +424,18 @@ components:
           description: CPF-CNPJ.
           type: number
           example: 100.00
-    ResponseGetListaVeiculos:
-      type: array
-      description: Response Lista de Veículos
-      items:
-        $ref: "#/components/schemas/ResponseGetVeiculo"
     ResponseGetVeiculo:
       type: object
       description: Response data.
       additionalProperties: false
       properties:
         idVeiculo:
-          description: Nome do Veículo.
+          description: Id do Veículo.
           type: string
           minLength: 10
           maxLength: 40
           example: 53680f55-f15d-7963-9d89-53680f55f15d
-        nome:
+        nomeVeiculo:
           description: Nome do Veículo.
           type: string
           minLength: 2

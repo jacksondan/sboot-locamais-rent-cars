@@ -6,6 +6,7 @@ import br.com.locamais.rent.cars.representation.ResponseGetVeiculo;
 import br.com.locamais.rent.cars.representation.ResponseSuccess;
 
 import java.util.List;
+import java.util.UUID;
 
 public interface RentCarsService {
 

@@ -34,19 +34,13 @@ public class RentCarsController implements V1Api {
     }
 
     @Override
-    public ResponseEntity<Void> deleteVeiculo( String idVeiculo){
+    public ResponseEntity<Void> deleteVeiculo(String idVeiculo){
         service.apagarVeiculo(idVeiculo);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @Override
     public ResponseEntity<List<ResponseGetVeiculo>> getListAll(){
-        log.info("Executando listagem de veículos");
-        var failMessage = new ResponseError()
-                .error("Erro planejado para teste")
-                .statusCode(400)
-                .success(false);
-        log.error("Erro apresentado ao consultar lista de veículos");
         return new ResponseEntity<>(service.listarVeiculos(),HttpStatus.OK);
     }
 

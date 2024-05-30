@@ -24,13 +24,18 @@ public class RentCarsController implements V1Api {
     }
 
     @Override
-    public ResponseEntity<ResponseSuccess> postVeiculo(RequestPostVeiculo requestPostVeiculo){
-        return new ResponseEntity<>(service.salvarVeiculo(requestPostVeiculo),HttpStatus.CREATED);
+    public ResponseEntity<ResponseSuccess> postVeiculo(RequestInsertVeiculo requestInsertVeiculo){
+        return new ResponseEntity<>(service.salvarVeiculo(requestInsertVeiculo),HttpStatus.CREATED);
     }
 
     @Override
-    public ResponseEntity<ResponseSuccess> patchVeiculo(String idVeiculo, RequestPatchVeiculo requestPatchVeiculo){
-        return new ResponseEntity<>(service.alterarVeiculo(idVeiculo,requestPatchVeiculo),HttpStatus.OK);
+    public ResponseEntity<ResponseSuccess> putVeiculo(String idVeiculo, RequestUpdateVeiculo requestUpdateVeiculo){
+        return new ResponseEntity<>(service.alterarCompletaVeiculo(idVeiculo,requestUpdateVeiculo),HttpStatus.OK);
+    }
+
+    @Override
+    public ResponseEntity<ResponseSuccess> patchVeiculo(String idVeiculo, RequestUpdateVeiculo requestUpdateVeiculo){
+        return new ResponseEntity<>(service.alterarParcialVeiculo(idVeiculo,requestUpdateVeiculo),HttpStatus.OK);
     }
 
     @Override

@@ -1,17 +1,17 @@
 package br.com.locamais.sbootlocamaisrentcars.service;
 
-import br.com.locamais.rent.cars.representation.RequestPatchVeiculo;
-import br.com.locamais.rent.cars.representation.RequestPostVeiculo;
+import br.com.locamais.rent.cars.representation.RequestInsertVeiculo;
+import br.com.locamais.rent.cars.representation.RequestUpdateVeiculo;
 import br.com.locamais.rent.cars.representation.ResponseGetVeiculo;
 import br.com.locamais.rent.cars.representation.ResponseSuccess;
 
 import java.util.List;
-import java.util.UUID;
 
 public interface RentCarsService {
 
-    ResponseSuccess salvarVeiculo(RequestPostVeiculo requestPostVeiculo);
-    ResponseSuccess alterarVeiculo(String idVeiculo, RequestPatchVeiculo requestPatchVeiculo);
+    ResponseSuccess salvarVeiculo(RequestInsertVeiculo requestInsertVeiculo);
+    ResponseSuccess alterarCompletaVeiculo(String idVeiculo, RequestUpdateVeiculo requestUpdateVeiculo);
+    ResponseSuccess alterarParcialVeiculo(String idVeiculo, RequestUpdateVeiculo requestUpdateVeiculo);
     void apagarVeiculo(String idVeiculo);
     ResponseGetVeiculo buscarVeiculo(String idVeiculo);
     List<ResponseGetVeiculo> listarVeiculos();

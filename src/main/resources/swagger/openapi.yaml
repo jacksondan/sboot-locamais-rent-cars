@@ -21,7 +21,7 @@ paths:
       description: Cadastro de veículos da base de dados LocaMais
       operationId: postVeiculo
       requestBody:
-        $ref: '#/components/requestBodies/RequestPostVeiculo'
+        $ref: '#/components/requestBodies/RequestInsertVeiculo'
       responses:
         '201':
           $ref: "#/components/responses/ResponseSuccess"
@@ -65,6 +65,33 @@ paths:
           $ref: "#/components/responses/ServiceUnavailable"
         default:
           $ref: "#/components/responses/ResponseGetVeiculo"
+    put:
+      tags:
+        - veiculos
+      summary: Update de informações de veículo
+      description: Atualização de dados de veículo através do ID
+      operationId: putVeiculo
+      requestBody:
+        $ref: '#/components/requestBodies/RequestUpdateVeiculo'
+      parameters:
+        - $ref: "#/components/parameters/IdVeiculo"
+      responses:
+        '200':
+          $ref: "#/components/responses/ResponseSuccess"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
+        default:
+          $ref: "#/components/responses/ResponseSuccess"
     patch:
       tags:
         - veiculos
@@ -72,7 +99,7 @@ paths:
       description: Atualização de dados de veículo através do ID
       operationId: patchVeiculo
       requestBody:
-        $ref: '#/components/requestBodies/RequestPatchVeiculo'
+        $ref: '#/components/requestBodies/RequestUpdateVeiculo'
       parameters:
         - $ref: "#/components/parameters/IdVeiculo"
       responses:
@@ -211,7 +238,7 @@ components:
       required: true
       schema:
         type: string
-#        pattern: "\\d"
+        #        pattern: "\\d"
         minLength: 11
         maxLength: 11
         example: 44109095093
@@ -222,24 +249,24 @@ components:
       required: true
       schema:
         type: string
-#        pattern: '^([a-zA-Z0-9][a-zA-Z0-9\-]{1,99})$'
+        #        pattern: '^([a-zA-Z0-9][a-zA-Z0-9\-]{1,99})$'
         maxLength: 100
         example: 53680f55-f15d-7963-9d89-53680f55f15d
   requestBodies:
-    RequestPostVeiculo:
+    RequestInsertVeiculo:
       description: Payload para cadastro de veículo
       required: true
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/RequestPostVeiculo"
-    RequestPatchVeiculo:
+            $ref: "#/components/schemas/RequestInsertVeiculo"
+    RequestUpdateVeiculo:
       description: Payload para cadastro de veículo
       required: true
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/RequestPatchVeiculo"
+            $ref: "#/components/schemas/RequestUpdateVeiculo"
   responses:
     ResponseGetListaVeiculos:
       description: Registro criado
@@ -337,7 +364,7 @@ components:
             $ref: "#/components/schemas/ResponseError"
 
   schemas:
-    RequestPostVeiculo:
+    RequestInsertVeiculo:
       type: object
       description: Request Post Veiculos.
       required:
@@ -377,13 +404,13 @@ components:
           type: string
           minLength: 17
           maxLength: 17
-#          pattern: '^([a-zA-Z0-9][a-zA-Z0-9\-])$'
+          #          pattern: '^([a-zA-Z0-9][a-zA-Z0-9\-])$'
           example: "LVVDA11A75D029813"
         valorTabela:
           description: CPF-CNPJ.
           type: number
           example: 100.00
-    RequestPatchVeiculo:
+    RequestUpdateVeiculo:
       type: object
       description: Request Patch Veiculos.
       additionalProperties: false
@@ -418,7 +445,7 @@ components:
           type: string
           minLength: 17
           maxLength: 17
-#          pattern: '^([a-zA-Z0-9][a-zA-Z0-9\-])$'
+          #          pattern: '^([a-zA-Z0-9][a-zA-Z0-9\-])$'
           example: "LVVDA11A75D029813"
         valorTabela:
           description: CPF-CNPJ.
@@ -474,7 +501,7 @@ components:
           type: string
           minLength: 17
           maxLength: 17
-#          pattern: '^([a-zA-Z0-9][a-zA-Z0-9\-])$'
+          #          pattern: '^([a-zA-Z0-9][a-zA-Z0-9\-])$'
           example: "LVVDA11A75D029813"
         valorTabela:
           description: CPF-CNPJ.

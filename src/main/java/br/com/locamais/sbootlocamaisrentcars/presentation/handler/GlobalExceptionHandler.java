@@ -29,7 +29,11 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(EntityNotFoundException.class)
     public ResponseEntity<ResponseError> hangleEntityNotFound(){
-        return ResponseEntity.notFound().build();
+        var response = new ResponseError()
+                .error("Registro não encontrado")
+                .statusCode(HttpStatus.NOT_FOUND.value())
+                .success(false);
+        return new ResponseEntity<>(response,HttpStatus.NOT_FOUND);
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)

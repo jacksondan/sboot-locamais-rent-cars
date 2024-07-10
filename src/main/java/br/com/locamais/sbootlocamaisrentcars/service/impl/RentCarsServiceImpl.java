@@ -92,21 +92,13 @@ public class RentCarsServiceImpl implements RentCarsService {
     @Override
     public ResponseGetVeiculo buscarVeiculo(String idVeiculo) {
         var response = repository.findById(UUID.fromString(idVeiculo));
-        if (response.isPresent()) {
-            return mapper.map(response.get(), ResponseGetVeiculo.class);
-        } else {
-            var message = "Registro não encontrado para o id: "+idVeiculo;
-            throw new HttpClientErrorException(HttpStatus.NOT_FOUND,message);
-        }
-
+        return mapper.map(response.get(), ResponseGetVeiculo.class);
     }
 
     @SneakyThrows
     @Override
     public List<ResponseGetVeiculo> listarVeiculos() {
         var response = repository.findAll();
-        if (response.isEmpty())
-            throw new HttpClientErrorException(HttpStatus.NO_CONTENT);
         return mapper.map(response,new TypeToken<List<ResponseGetVeiculo>>() {}.getType());
     }
 

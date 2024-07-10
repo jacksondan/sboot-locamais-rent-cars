@@ -41,7 +41,7 @@ public class RentCarsController implements V1Api {
     @Override
     public ResponseEntity<Void> deleteVeiculo(String idVeiculo){
         service.apagarVeiculo(idVeiculo);
-        return new ResponseEntity<>(HttpStatus.OK);
+        return ResponseEntity.noContent().build();
     }
 
     @Override
